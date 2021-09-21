@@ -2,24 +2,48 @@
 <html>
 
 <head>
-  <% include ../includes/header.ejs %>
+  <%- include('../includes/header.ejs') %>
 </head>
 
 <body>
-  <% include ../includes/nav.ejs %>
+  <%- include('../includes/nav.ejs') %>
     <div class="jumbotron text-center">
       <div class="container">
         <h1>
           <%= title %>
         </h1>
-        <p>This is the placeholder for Team Activity 02</p>
+        <div class="container-users">
+          <% if (users.length> 0) { %>
+            <table>
+              <tr>
+                <th>Usernames</th>
+              </tr>
+              <% users.forEach((user) => { %>
+                <tr>
+                  <td><%= user.name %></td>
+                </tr>
+              <% }) %>
+            </table>
+          <% } else { %>
+            <p>No users found</p>
+          <% } %>
+        </div>
+        <div class="container-addUser">
+          <h2>Add a user:</h2>
+          <form action="/ta02/addUser" method="POST">
+            <input type="text" name="addUsername">
+            <button type="submit" class="btn-primary">Submit</button>
+          </form>
+        </div>
+        <div class="container-removeUser">
+          <h2>Remove a user:</h2>
+          <form action="/ta02/removeUser" method="POST">
+            <input type="text" name="removeUsername">
+            <button type="submit" class="btn-primary">Submit</button>
+          </form>
+        </div>
       </div>
     </div>
-    <div class="container">
-
-    </div>
-
-
 </body>
 
 </html>
